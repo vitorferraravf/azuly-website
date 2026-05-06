@@ -1,0 +1,51 @@
+<!doctype html>
+<!--
+  Página intermediária do Cloudflare Turnstile para consumo via WebView no app.
+  Hospedada em https://azuly.app/turnstile.html.
+
+  Substitua data-sitekey pelo valor real (Cloudflare → Turnstile → Add site).
+  A página é minimalista de propósito: roda em invisible mode e devolve o token
+  via window.ReactNativeWebView.postMessage.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verificação</title>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    html, body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
+    .cf-turnstile { display: block; }
+  </style>
+</head>
+<body>
+  <div
+    id="t"
+    class="cf-turnstile"
+    data-sitekey="0x4AAAAAADKUAUrEcOCQWZb7"
+    data-callback="onVerify"
+    data-error-callback="onError"
+    data-expired-callback="onExpired"
+    data-size="invisible"
+  ></div>
+  <script>
+    function send(payload) {
+      try {
+        window.ReactNativeWebView && window.ReactNativeWebView.postMessage(JSON.stringify(payload));
+      } catch (e) {}
+    }
+    function onVerify(token) { send({ type: 'verify', token: token }); }
+    function onError(code)   { send({ type: 'error', code: String(code || 'unknown') }); }
+    function onExpired()     { send({ type: 'expired' }); }
+
+    // Bridge para a RN solicitar execução: window.execute() executa o widget.
+    window.execute = function () {
+      try {
+        if (window.turnstile) window.turnstile.execute('#t');
+      } catch (e) {
+        send({ type: 'error', code: 'execute_failed' });
+      }
+    };
+  </script>
+</body>
+</html>
