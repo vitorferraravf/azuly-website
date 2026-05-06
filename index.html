@@ -1,10 +1,14 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="landing">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Azuly — Companheiro de Terapia</title>
-  <meta name="description" content="Companheiro de Terapia — app de apoio à jornada terapêutica. Política de Privacidade e Termos de Uso." />
+  <title>Companheiro de Terapia — Azuly</title>
+  <meta name="description" content="Acompanhe sua jornada terapêutica de forma simples e privada. Humor diário, sessões, Roda da Vida e tarefas — sem login, sem rastreamento." />
+  <meta property="og:title" content="Companheiro de Terapia" />
+  <meta property="og:description" content="Sua jornada terapêutica, em um lugar só." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://azuly.app" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
@@ -19,22 +23,51 @@
   </header>
 
   <main>
-    <h1>Companheiro de Terapia</h1>
-    <p class="muted">App de apoio à jornada terapêutica. Brasil. iOS.</p>
+    <section class="hero">
+      <span class="eyebrow">Beta privado</span>
+      <h1>Sua jornada terapêutica, em um lugar só.</h1>
+      <p class="lead">
+        Acompanhe humor, anote suas sessões e visualize seu progresso pela Roda da Vida —
+        privado, anônimo, no seu ritmo.
+      </p>
+      <span class="cta-soon" aria-label="Em breve">Em breve</span>
+      <p class="hint">Disponível em iOS · Brasil</p>
+    </section>
 
-    <h2>Documentos legais</h2>
-    <ul>
-      <li><a href="./privacy.html">Política de Privacidade</a></li>
-      <li><a href="./terms.html">Termos de Uso</a></li>
-    </ul>
+    <section class="features" aria-label="Recursos">
+      <article class="feature">
+        <div class="icon" aria-hidden="true">🌤️</div>
+        <h3>Como você está hoje?</h3>
+        <p>Registre seu humor diário com uma nota opcional. Sem julgamento, só você e seus dias.</p>
+      </article>
+      <article class="feature">
+        <div class="icon" aria-hidden="true">📓</div>
+        <h3>Anote suas sessões</h3>
+        <p>Texto livre pra refletir o que ficou de cada sessão. Acompanhe insights ao longo do tempo.</p>
+      </article>
+      <article class="feature">
+        <div class="icon" aria-hidden="true">🎯</div>
+        <h3>Roda da Vida</h3>
+        <p>Avalie 8 áreas da sua vida e veja sua evolução visualmente, sem precisar virar planilha.</p>
+      </article>
+      <article class="feature">
+        <div class="icon" aria-hidden="true">✓</div>
+        <h3>Tarefas entre sessões</h3>
+        <p>Anote práticas e exercícios sugeridos pelo terapeuta. Marque conforme realiza.</p>
+      </article>
+    </section>
 
-    <h2>Contato</h2>
-    <p>Suporte e exercício de direitos: <a href="mailto:contato@azuly.app">contato@azuly.app</a></p>
-    <p class="muted">Ferrara Estudio de Design LTDA · CNPJ 44.596.437/0001-05</p>
+    <section class="privacy-strip" aria-label="Privacidade">
+      <h2>Sem login. Sem rastreamento.</h2>
+      <p>Sua conta é anônima por padrão. Os dados são seus — e você apaga tudo a qualquer momento.</p>
+    </section>
   </main>
 
   <footer>
-    © Ferrara Estudio de Design LTDA · <a href="mailto:contato@azuly.app">contato@azuly.app</a>
+    © Ferrara Estudio de Design LTDA ·
+    <a href="./privacy.html">Privacidade</a> ·
+    <a href="./terms.html">Termos</a> ·
+    <a href="mailto:contato@azuly.app">contato@azuly.app</a>
   </footer>
 </body>
 </html>
