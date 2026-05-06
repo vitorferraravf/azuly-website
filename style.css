@@ -5,8 +5,8 @@
   --text-secondary: #5F5E5A;
   --text-tertiary: #888780;
   --border: #E8E4DC;
-  --brand: #639922;
-  --brand-hover: #3B6D11;
+  --brand: #2D69B3;
+  --brand-hover: #1B4584;
   --max-width: 720px;
 }
 
@@ -18,8 +18,8 @@
     --text-secondary: #B4B2A9;
     --text-tertiary: #888780;
     --border: #444441;
-    --brand: #97C459;
-    --brand-hover: #C0DD97;
+    --brand: #5A93D6;
+    --brand-hover: #B0CDED;
   }
 }
 
