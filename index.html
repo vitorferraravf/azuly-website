@@ -3,18 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Azuly</title>
-  <meta name="description" content="Acompanhe sua jornada terapêutica de forma simples e privada. Humor diário, sessões, Roda da Vida e tarefas — sem login, sem rastreamento." />
+  <meta name="theme-color" content="#F7F5F0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)" />
+
+  <title>Azuly — Sua jornada terapêutica, no seu ritmo</title>
+  <meta name="description" content="Acompanhe humor, anote suas sessões e visualize seu progresso pela Roda da Vida. Privado, anônimo, sem rastreamento." />
+
   <meta property="og:title" content="Azuly" />
-  <meta property="og:description" content="Sua jornada terapêutica, em um lugar só." />
+  <meta property="og:description" content="Sua jornada terapêutica, no seu ritmo. Privado, anônimo, sem rastreamento." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://azuly.app" />
+  <meta property="og:image" content="https://azuly.app/apple-touch-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Azuly" />
+  <meta name="twitter:description" content="Sua jornada terapêutica, no seu ritmo." />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <div class="inner">
-      <a class="brand" href="./">Azuly</a>
+      <a class="brand" href="./">
+        <img src="./favicon-32.png" alt="" width="24" height="24" />
+        <span>Azuly</span>
+      </a>
       <nav>
         <a href="./privacy.html">Privacidade</a>
         <a href="./terms.html">Termos</a>
@@ -24,50 +44,309 @@
 
   <main>
     <section class="hero">
-      <span class="eyebrow">Beta privado</span>
-      <h1>Sua jornada terapêutica, em um lugar só.</h1>
-      <p class="lead">
-        Acompanhe humor, anote suas sessões e visualize seu progresso pela Roda da Vida —
-        privado, anônimo, no seu ritmo.
+      <div class="hero-content">
+        <span class="eyebrow" data-reveal>
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          Beta privado
+        </span>
+        <h1 data-reveal>Sua jornada terapêutica,<br /><em>no seu ritmo.</em></h1>
+        <p class="lead" data-reveal>
+          Acompanhe humor, anote suas sessões e visualize seu progresso pela Roda da Vida.
+          Privado, anônimo, sem rastreamento.
+        </p>
+        <div class="hero-cta" data-reveal>
+          <span class="cta-soon">
+            <span class="cta-soon-dot" aria-hidden="true"></span>
+            Em breve no TestFlight
+          </span>
+          <p class="hint">iOS · Brasil</p>
+        </div>
+      </div>
+
+      <div class="ui-stage" data-reveal aria-label="Prévia do app Azuly">
+        <div class="ui-stage-glow" aria-hidden="true"></div>
+
+        <!-- Mood picker — floating top -->
+        <div class="ui-card ui-card--mood">
+          <p class="ui-eyebrow">Como você está hoje?</p>
+          <div class="mood-row">
+            <span class="mood-dot" data-v="1" aria-hidden="true"></span>
+            <span class="mood-dot" data-v="2" aria-hidden="true"></span>
+            <span class="mood-dot" data-v="3" aria-hidden="true"></span>
+            <span class="mood-dot is-selected" data-v="4" aria-hidden="true"></span>
+            <span class="mood-dot" data-v="5" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <!-- Calendar card — centerpiece -->
+        <div class="ui-card ui-card--calendar">
+          <div class="ui-card-head">
+            <span class="ui-card-title">Maio</span>
+            <span class="ui-card-meta">2026</span>
+          </div>
+          <div class="cal-weekdays" aria-hidden="true">
+            <span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span>
+          </div>
+          <div class="cal-grid" aria-hidden="true">
+            <span class="cal-cell is-ghost">26</span>
+            <span class="cal-cell is-ghost">27</span>
+            <span class="cal-cell is-ghost">28</span>
+            <span class="cal-cell is-ghost">29</span>
+            <span class="cal-cell is-ghost">30</span>
+            <span class="cal-cell" data-v="3">1</span>
+            <span class="cal-cell" data-v="4">2</span>
+            <span class="cal-cell" data-v="4">3</span>
+            <span class="cal-cell" data-v="5">4</span>
+            <span class="cal-cell" data-v="2">5</span>
+            <span class="cal-cell">6</span>
+            <span class="cal-cell" data-v="4">7</span>
+            <span class="cal-cell" data-v="5">8</span>
+            <span class="cal-cell" data-v="3">9</span>
+            <span class="cal-cell" data-v="4">10</span>
+            <span class="cal-cell" data-v="4">11</span>
+            <span class="cal-cell" data-v="5">12</span>
+            <span class="cal-cell" data-v="2">13</span>
+            <span class="cal-cell" data-v="4">14</span>
+            <span class="cal-cell" data-v="3">15</span>
+            <span class="cal-cell" data-v="4">16</span>
+            <span class="cal-cell" data-v="5">17</span>
+            <span class="cal-cell" data-v="5">18</span>
+            <span class="cal-cell" data-v="4">19</span>
+            <span class="cal-cell" data-v="3">20</span>
+            <span class="cal-cell" data-v="4">21</span>
+            <span class="cal-cell" data-v="4">22</span>
+            <span class="cal-cell is-today">23</span>
+            <span class="cal-cell is-future">24</span>
+            <span class="cal-cell is-future">25</span>
+            <span class="cal-cell is-future">26</span>
+            <span class="cal-cell is-future">27</span>
+            <span class="cal-cell is-future">28</span>
+            <span class="cal-cell is-future">29</span>
+            <span class="cal-cell is-future">30</span>
+            <span class="cal-cell is-future">31</span>
+          </div>
+        </div>
+
+        <!-- Tarefa item — floating bottom -->
+        <div class="ui-card ui-card--tarefa">
+          <span class="ui-checkbox is-checked" aria-hidden="true">
+            <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7.5l2.5 2.5L11 4.5" />
+            </svg>
+          </span>
+          <div class="ui-tarefa-text">
+            <span class="ui-tarefa-title">Releitura das anotações</span>
+            <div class="ui-badges">
+              <span class="ui-badge" style="--badge-color: var(--area-desenvolvimento);">
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M2 11l4-4 3 3 3-4" /><path d="M9 6h3v3" />
+                </svg>
+                Desenvolvimento
+              </span>
+              <span class="ui-badge ui-badge--soft">
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 4.5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
+                  <path d="M5 2.5v2M9 2.5v2M3 6.5h8" />
+                </svg>
+                Toda quarta
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="manifesto" data-reveal>
+      <p>
+        Pra quem está em terapia e quer dar continuidade ao processo entre as sessões —
+        sem virar diário, sem virar planilha, sem virar mais uma rede social.
       </p>
-      <span class="cta-soon" aria-label="Em breve">Em breve</span>
-      <p class="hint">Disponível em iOS · Brasil</p>
     </section>
 
-    <section class="features" aria-label="Recursos">
-      <article class="feature">
-        <div class="icon" aria-hidden="true">🌤️</div>
-        <h3>Como você está hoje?</h3>
-        <p>Registre seu humor diário com uma nota opcional. Sem julgamento, só você e seus dias.</p>
-      </article>
-      <article class="feature">
-        <div class="icon" aria-hidden="true">📓</div>
-        <h3>Anote suas sessões</h3>
-        <p>Texto livre pra refletir o que ficou de cada sessão. Acompanhe insights ao longo do tempo.</p>
-      </article>
-      <article class="feature">
-        <div class="icon" aria-hidden="true">🎯</div>
-        <h3>Roda da Vida</h3>
-        <p>Avalie 8 áreas da sua vida e veja sua evolução visualmente, sem precisar virar planilha.</p>
-      </article>
-      <article class="feature">
-        <div class="icon" aria-hidden="true">✓</div>
-        <h3>Tarefas entre sessões</h3>
-        <p>Anote práticas e exercícios sugeridos pelo terapeuta. Marque conforme realiza.</p>
-      </article>
+    <section class="features">
+      <header class="section-head" data-reveal>
+        <span class="kicker">O que tem dentro</span>
+        <h2>Quatro práticas, um só lugar.</h2>
+      </header>
+
+      <div class="feature-grid">
+        <article class="feature" data-reveal>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 16a5 5 0 0 1 4.5-5 6 6 0 0 1 11.6 1.4A4 4 0 0 1 18 20H7a4 4 0 0 1-4-4z" />
+            </svg>
+          </div>
+          <h3>Como você está hoje?</h3>
+          <p>Registre seu humor diário com uma nota opcional. Veja o calendário do mês de relance.</p>
+        </article>
+
+        <article class="feature" data-reveal>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 4h12a2 2 0 0 1 2 2v14l-3-2-3 2-3-2-3 2-3-2V6a2 2 0 0 1 1-2z" />
+              <path d="M9 9h7M9 13h7M9 17h4" />
+            </svg>
+          </div>
+          <h3>Anote suas sessões</h3>
+          <p>Texto livre pra refletir o que ficou de cada sessão. Acompanhe insights ao longo do tempo.</p>
+        </article>
+
+        <article class="feature" data-reveal>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="12" r="5.5" />
+              <circle cx="12" cy="12" r="2" />
+              <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" opacity="0.4" />
+            </svg>
+          </div>
+          <h3>Roda da Vida</h3>
+          <p>Avalie 8 áreas da sua vida e acompanhe a evolução visualmente — sem precisar virar planilha.</p>
+        </article>
+
+        <article class="feature" data-reveal>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="5" width="16" height="15" rx="2" />
+              <path d="M9 3v4M15 3v4M4 10h16" />
+              <path d="M9 14l2 2 4-4" />
+            </svg>
+          </div>
+          <h3>Tarefas entre sessões</h3>
+          <p>Anote práticas e exercícios sugeridos pelo terapeuta. Recorrências e lembretes opcionais.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="privacy-strip" aria-label="Privacidade">
-      <h2>Sem login. Sem rastreamento.</h2>
-      <p>Sua conta é anônima por padrão. Os dados são seus — e você apaga tudo a qualquer momento.</p>
+    <section class="how">
+      <header class="section-head" data-reveal>
+        <span class="kicker">Como funciona</span>
+        <h2>Um ritual leve, três passos.</h2>
+      </header>
+
+      <ol class="steps">
+        <li class="step" data-reveal>
+          <span class="step-num">01</span>
+          <h3>Registre</h3>
+          <p>Um toque pro humor do dia. Uma anotação curta depois de cada sessão.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step-num">02</span>
+          <h3>Reflita</h3>
+          <p>Releia o que escreveu. Volte à Roda da Vida quando quiser olhar o todo.</p>
+        </li>
+        <li class="step" data-reveal>
+          <span class="step-num">03</span>
+          <h3>Acompanhe</h3>
+          <p>Veja padrões emergindo ao longo das semanas — sem cobrança, sem score.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="privacy-block" data-reveal>
+      <span class="kicker">Privacidade</span>
+      <h2>Sem login. <em>Sem rastreamento.</em></h2>
+      <p>
+        Sua conta é anônima por padrão. Os dados são seus —
+        e você apaga tudo a qualquer momento, do próprio app.
+      </p>
+      <ul class="privacy-points">
+        <li>Conta anônima, sem e-mail nem telefone</li>
+        <li>Dados criptografados em trânsito e em repouso</li>
+        <li>Exclusão total da conta com um toque</li>
+      </ul>
+    </section>
+
+    <section class="faq">
+      <header class="section-head" data-reveal>
+        <span class="kicker">Perguntas frequentes</span>
+        <h2>O básico, respondido.</h2>
+      </header>
+
+      <div class="faq-list">
+        <details class="faq-item" data-reveal>
+          <summary>O Azuly substitui terapia?</summary>
+          <p>
+            Não. Azuly é um companheiro pra quem já faz terapia (ou está pensando em começar)
+            e quer um lugar pra registrar o processo entre as sessões.
+          </p>
+        </details>
+
+        <details class="faq-item" data-reveal>
+          <summary>Meu terapeuta vê meus registros?</summary>
+          <p>
+            Não automaticamente. O conteúdo é seu — você decide se compartilha algo, e como.
+            Não há nenhum tipo de painel ou acesso de terceiros.
+          </p>
+        </details>
+
+        <details class="faq-item" data-reveal>
+          <summary>Como funciona ser anônimo?</summary>
+          <p>
+            A conta é criada sem e-mail, telefone ou nome. Um identificador aleatório no aparelho.
+            Você pode adicionar um apelido se quiser, mas é opcional.
+          </p>
+        </details>
+
+        <details class="faq-item" data-reveal>
+          <summary>Quanto custa?</summary>
+          <p>
+            Durante o beta, totalmente gratuito. Quando o app sair do beta, anunciamos antes
+            qualquer cobrança — e o que já foi registrado continua acessível.
+          </p>
+        </details>
+
+        <details class="faq-item" data-reveal>
+          <summary>Tem versão Android?</summary>
+          <p>
+            Ainda não. Estamos focados em fazer o iOS muito bem feito antes de expandir.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <section class="closing" data-reveal>
+      <h2>Um espaço pra você.<br /><em>Em breve.</em></h2>
+      <p>Disponível primeiro no TestFlight. Em seguida, na App Store, no Brasil.</p>
+      <span class="cta-soon">
+        <span class="cta-soon-dot" aria-hidden="true"></span>
+        Em breve no TestFlight
+      </span>
     </section>
   </main>
 
-  <footer>
-    © Ferrara Estudio de Design LTDA ·
-    <a href="./privacy.html">Privacidade</a> ·
-    <a href="./terms.html">Termos</a> ·
-    <a href="mailto:contato@azuly.app">contato@azuly.app</a>
+  <footer class="site-footer">
+    <div class="inner">
+      <div class="footer-brand">
+        <img src="./favicon-32.png" alt="" width="20" height="20" />
+        <span>Azuly</span>
+      </div>
+      <nav class="footer-nav">
+        <a href="./privacy.html">Privacidade</a>
+        <a href="./terms.html">Termos</a>
+        <a href="mailto:contato@azuly.app">contato@azuly.app</a>
+      </nav>
+      <p class="footer-fine">© 2026 Ferrara Estudio de Design LTDA</p>
+    </div>
   </footer>
+
+  <script>
+    (function () {
+      const items = document.querySelectorAll('[data-reveal]');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+      items.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
