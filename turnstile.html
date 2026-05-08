@@ -3,18 +3,28 @@
   Página intermediária do Cloudflare Turnstile para consumo via WebView no app.
   Hospedada em https://azuly.app/turnstile.html.
 
-  Substitua data-sitekey pelo valor real (Cloudflare → Turnstile → Add site).
-  A página é minimalista de propósito: roda em invisible mode e devolve o token
-  via window.ReactNativeWebView.postMessage.
+  Roda em modo flexível (visível, ~65px de altura, largura responsiva).
+  Auto-executa ao renderizar e devolve o token via postMessage.
 -->
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Verificação</title>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <style>
-    html, body { margin: 0; padding: 0; background: transparent; overflow: hidden; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color-scheme: light dark;
+    }
     .cf-turnstile { display: block; }
   </style>
 </head>
@@ -26,7 +36,9 @@
     data-callback="onVerify"
     data-error-callback="onError"
     data-expired-callback="onExpired"
-    data-size="invisible"
+    data-size="flexible"
+    data-theme="auto"
+    data-appearance="always"
   ></div>
   <script>
     function send(payload) {
@@ -38,10 +50,30 @@
     function onError(code)   { send({ type: 'error', code: String(code || 'unknown') }); }
     function onExpired()     { send({ type: 'expired' }); }
 
-    // Bridge para a RN solicitar execução: window.execute() executa o widget.
-    window.execute = function () {
+    // Avisa o RN quando o turnstile está pronto pra ser executado.
+    (function notifyReady() {
+      var deadline = Date.now() + 25000;
+      function tick() {
+        if (window.turnstile && typeof window.turnstile.execute === 'function') {
+          send({ type: 'ready' });
+          return;
+        }
+        if (Date.now() > deadline) {
+          send({ type: 'error', code: 'turnstile_unavailable' });
+          return;
+        }
+        setTimeout(tick, 150);
+      }
+      tick();
+    })();
+
+    // Bridge opcional: se o RN quiser forçar reset+execute (ex: após expirar).
+    window.refresh = function () {
       try {
-        if (window.turnstile) window.turnstile.execute('#t');
+        if (window.turnstile) {
+          if (window.turnstile.reset) { try { window.turnstile.reset('#t'); } catch (e) {} }
+          window.turnstile.execute('#t');
+        }
       } catch (e) {
         send({ type: 'error', code: 'execute_failed' });
       }
