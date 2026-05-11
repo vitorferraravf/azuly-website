@@ -55,11 +55,32 @@
           Privado, anônimo, sem rastreamento.
         </p>
         <div class="hero-cta" data-reveal>
-          <a class="cta" href="https://testflight.apple.com/join/6ZHu85KF" target="_blank" rel="noopener">
-            Entrar no beta via TestFlight
-            <span class="cta-arrow" aria-hidden="true">→</span>
-          </a>
-          <p class="hint">iOS 16+ · Instale o TestFlight antes</p>
+          <form class="beta-form" data-beta-form>
+            <label class="sr-only" for="beta-email-hero">Seu e-mail</label>
+            <input
+              id="beta-email-hero"
+              type="email"
+              name="email"
+              placeholder="seu@email.com"
+              autocomplete="email"
+              required
+            />
+            <input
+              class="beta-form-honeypot"
+              type="text"
+              name="honeypot"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
+            <button type="submit" class="cta">
+              Quero entrar no beta
+              <span class="cta-arrow" aria-hidden="true">→</span>
+            </button>
+          </form>
+          <p class="hint" data-beta-feedback aria-live="polite">
+            Te mandamos o convite do TestFlight em até 24h
+          </p>
         </div>
       </div>
 
@@ -308,10 +329,32 @@
     <section class="closing" data-reveal>
       <h2>Um espaço pra você.<br /><em>Disponível agora.</em></h2>
       <p>No TestFlight durante o beta. Em seguida, na App Store, no Brasil.</p>
-      <a class="cta" href="https://testflight.apple.com/join/6ZHu85KF" target="_blank" rel="noopener">
-        Entrar no beta via TestFlight
-        <span class="cta-arrow" aria-hidden="true">→</span>
-      </a>
+      <form class="beta-form beta-form--centered" data-beta-form>
+        <label class="sr-only" for="beta-email-closing">Seu e-mail</label>
+        <input
+          id="beta-email-closing"
+          type="email"
+          name="email"
+          placeholder="seu@email.com"
+          autocomplete="email"
+          required
+        />
+        <input
+          class="beta-form-honeypot"
+          type="text"
+          name="honeypot"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+        <button type="submit" class="cta">
+          Quero entrar no beta
+          <span class="cta-arrow" aria-hidden="true">→</span>
+        </button>
+      </form>
+      <p class="hint closing-hint" data-beta-feedback aria-live="polite">
+        Te mandamos o convite do TestFlight em até 24h
+      </p>
     </section>
   </main>
 
@@ -346,6 +389,74 @@
         });
       }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
       items.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var ENDPOINT = 'https://mvyzqfnoptwixipbdbfw.supabase.co/functions/v1/beta-signup';
+      var ANON_KEY = 'sb_publishable_lrmTJXlQyZBUyx2HzfqXLg_NpC-VKdk';
+
+      document.querySelectorAll('[data-beta-form]').forEach(function (form) {
+        var feedback = form.parentElement.querySelector('[data-beta-feedback]');
+        var button = form.querySelector('button[type="submit"]');
+        var emailInput = form.querySelector('input[name="email"]');
+
+        form.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          if (form.dataset.submitting === '1') return;
+
+          var email = emailInput.value.trim();
+          var honeypot = form.querySelector('input[name="honeypot"]').value;
+
+          form.dataset.submitting = '1';
+          button.disabled = true;
+          if (feedback) {
+            feedback.textContent = 'Enviando...';
+            feedback.classList.remove('is-error', 'is-success');
+          }
+
+          try {
+            var res = await fetch(ENDPOINT, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'apikey': ANON_KEY,
+              },
+              body: JSON.stringify({ email: email, honeypot: honeypot }),
+            });
+            var data = await res.json().catch(function () { return {}; });
+
+            if (res.ok && data.ok) {
+              if (feedback) {
+                feedback.textContent = data.duplicate
+                  ? 'Você já está na lista — fica de olho na inbox.'
+                  : 'Recebemos! Te mandamos o convite por e-mail em até 24h.';
+                feedback.classList.add('is-success');
+              }
+              form.reset();
+            } else if (data.error === 'invalid_email') {
+              if (feedback) {
+                feedback.textContent = 'Esse e-mail parece inválido. Tenta de novo?';
+                feedback.classList.add('is-error');
+              }
+            } else {
+              if (feedback) {
+                feedback.textContent = 'Algo deu errado. Tenta de novo em alguns segundos.';
+                feedback.classList.add('is-error');
+              }
+            }
+          } catch (err) {
+            if (feedback) {
+              feedback.textContent = 'Sem conexão. Confere a internet e tenta de novo.';
+              feedback.classList.add('is-error');
+            }
+          } finally {
+            form.dataset.submitting = '';
+            button.disabled = false;
+          }
+        });
+      });
     })();
   </script>
 </body>
