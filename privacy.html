@@ -20,7 +20,7 @@
 
   <main>
     <h1>Política de Privacidade — Azuly</h1>
-    <p class="muted"><strong>Última atualização:</strong> 11 de maio de 2026</p>
+    <p class="muted"><strong>Última atualização:</strong> 12 de maio de 2026</p>
 
     <p>A presente Política de Privacidade descreve como a <strong>FERRARA ESTUDIO DE DESIGN LTDA</strong> ("Azuly", "nós") coleta, usa, armazena e compartilha as informações pessoais dos usuários do aplicativo <strong>Azuly</strong> ("App"). Ao utilizar o App, você concorda com esta Política. Se não concordar, não utilize o serviço.</p>
 
@@ -49,6 +49,7 @@
       <li><strong>Tarefas:</strong> título, prazo, categoria e status (pendente/concluída).</li>
       <li><strong>Avaliações da Roda da Vida:</strong> data e notas (0 a 10) para 8 áreas da vida.</li>
     </ul>
+    <p>Os campos de <strong>texto livre</strong> (anotações de sessões, notas de humor, títulos e descrições de tarefas) são <strong>criptografados no seu dispositivo</strong> antes de chegarem aos nossos servidores — veja a seção 2.5.</p>
 
     <h3>2.3 Dados técnicos e de uso</h3>
     <p>Para garantir estabilidade e melhorar o App, coletamos:</p>
@@ -69,7 +70,35 @@
     </ul>
     <p>Esses dados ficam armazenados em uma tabela separada e <strong>não são vinculados</strong> a nenhuma conta do App. Usamos o e-mail unicamente para enviar o convite do TestFlight (Apple) e descartamos a inscrição quando você sai da fase beta, a qualquer momento mediante solicitação.</p>
 
-    <h3>2.5 Biometria</h3>
+    <h3>2.5 Criptografia ponta-a-ponta dos seus registros</h3>
+    <p>A partir de 12 de maio de 2026, os campos de <strong>texto livre</strong> que você escreve no App são criptografados <strong>no próprio dispositivo</strong> antes de serem enviados aos nossos servidores. Isso significa que <strong>nem nós da Azuly conseguimos ler</strong> o conteúdo desses registros — apenas você.</p>
+    <p><strong>Campos criptografados:</strong></p>
+    <ul>
+      <li>Anotações de sessões</li>
+      <li>Notas dos seus registros de humor</li>
+      <li>Títulos e descrições das tarefas</li>
+    </ul>
+    <p><strong>Campos que permanecem em claro</strong> (necessários para gráficos, ordenação e filtros server-side):</p>
+    <ul>
+      <li>Valores numéricos: humor (1 a 5), notas da Roda da Vida (0 a 10), categoria das tarefas</li>
+      <li>Datas, horários e identificadores</li>
+      <li>Identificador anônimo de usuário</li>
+      <li>Nome de exibição (que você escolhe livremente — pode usar um apelido se preferir)</li>
+    </ul>
+    <p><strong>Como funciona:</strong></p>
+    <ul>
+      <li>Uma chave criptográfica única (AES-256) é gerada no seu iPhone na primeira abertura do App e armazenada no <strong>Keychain do iOS</strong> — área protegida pelo sistema operacional.</li>
+      <li>Cada campo cifrado usa um nonce único de 96 bits; o algoritmo é AES-256-GCM, com verificação de integridade (auth tag).</li>
+      <li>A chave <strong>nunca é transmitida</strong> aos nossos servidores. Nem a Azuly, nem a Supabase, nem qualquer prestador de serviço tem cópia.</li>
+    </ul>
+    <p><strong>Importante — perda de dispositivo:</strong></p>
+    <ul>
+      <li>A chave faz parte do backup do seu iPhone (iCloud Backup ou backup local via iTunes/Finder, se você tiver configurado). Restaurar o aparelho num novo iPhone traz a chave junto.</li>
+      <li>Caso você apague o iPhone <strong>sem ter feito backup</strong>, a chave é perdida. Como ela só existia no seu dispositivo, <strong>não temos como recuperar seus registros nesse cenário</strong> — esse trade-off é a contrapartida de termos zero conhecimento sobre o que você escreve.</li>
+    </ul>
+    <p><strong>Recomendação:</strong> mantenha o Backup do iPhone ativado em <strong>Ajustes → seu nome → iCloud → Backup do iPhone</strong>, para que seus registros continuem acessíveis caso troque ou perca o aparelho.</p>
+
+    <h3>2.6 Biometria</h3>
     <p><strong>Não coletamos nem armazenamos seus dados biométricos.</strong> A autenticação por Face ID / Touch ID acontece localmente no seu dispositivo, gerenciada pelo sistema operacional. Recebemos apenas um sinal de "autenticação aprovada" ou "negada".</p>
 
     <h2>3. Finalidades do tratamento</h2>
@@ -138,6 +167,7 @@
     <h2>9. Segurança</h2>
     <p>Adotamos medidas técnicas e organizacionais para proteger seus dados:</p>
     <ul>
+      <li><strong>Criptografia ponta-a-ponta</strong> dos campos de texto livre (anotações, notas, tarefas): cifrados no seu dispositivo com AES-256-GCM antes de serem enviados (veja seção 2.5). Nem nós conseguimos lê-los.</li>
       <li><strong>Comunicação criptografada</strong> (HTTPS/TLS) entre o App e nossos servidores.</li>
       <li><strong>Row Level Security (RLS)</strong> no banco — cada usuário só consegue acessar seus próprios registros, validado no servidor.</li>
       <li><strong>Tokens de sessão</strong> armazenados no Keychain (iOS) / Keystore (Android), nunca em texto puro.</li>
